@@ -1,0 +1,1483 @@
+@use "sass:color";
+@use "variables" as v;
+@use "navbar";
+
+// ----------------------------------------------------------------------------
+// 0) Reset & box-sizing
+// ----------------------------------------------------------------------------
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// ----------------------------------------------------------------------------
+// 1) Design tokens
+// ----------------------------------------------------------------------------
+$bg-light:  #EDDBCC;
+$accent:   #2728af ;
+$bg-dark:     #0a0a0a;
+$font:     'Arial', sans-serif;
+
+//#2728af nice blue
+//nicve cream #EDDBCC;
+//#EDDBCC;
+//background: linear-gradient(135deg, #0a0a0a 0%, rgb(22.75, 22.75, 22.75) 100%);
+ 
+
+// ----------------------------------------------------------------------------
+// 2) Base styles
+// ----------------------------------------------------------------------------
+body {
+  font-family: $font;
+  line-height: 1.5;
+  color: $bg-light;
+}
+html, body {
+  background: linear-gradient(135deg, #0a0a0a 0%, rgb(22.75, 22.75, 22.75) 100%);
+}
+
+// ----------------------------------------------------------------------------
+// 2.1) Utilities: reveal-on-scroll + spinning accent
+// ----------------------------------------------------------------------------
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+[data-inview] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+// ----------------------------------------------------------------------------
+// 3) Main wrapper (push below fixed navbar)
+// ----------------------------------------------------------------------------
+.home {
+  padding-top: 4rem; // adjust if your navbar’s taller/shorter
+}
+
+.site-main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.about,
+.skills,
+.education,
+.contact {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  scroll-margin-top: 4rem;
+  color: $bg-light;
+  width: 90%;
+}
+
+
+
+.hero{
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4rem 2rem;
+  scroll-margin-top: 4rem;
+  //border: 3px solid black;
+  width: 90%;
+}
+.hero__content {
+  h1 {
+    color: $bg-light;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 6vw;
+    font-weight: 500;
+    line-height: 10vw;
+  }
+  p {
+    font-size: 4rem;
+    color: $bg-light;
+    font-family: Neuemontreal, sans-serif;
+    font-size: 6vw;
+    line-height: .9em;
+  }
+}
+
+// Hero combined layout: profile left, headline and skills right
+.hero-combo {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 2rem;
+    width: 100%;
+
+    @media (max-width: 968px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+
+    .subtitle {
+      color: $bg-light;
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-weight: 500;
+    }
+
+    .stack-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      list-style: none;
+      padding: 0; margin: .5rem 0 0 0;
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .4rem .7rem;
+        border-radius: 999px;
+        background: rgba($bg-light, .12);
+        border: 1px solid rgba($bg-light, .25);
+        color: $bg-light;
+        font-weight: 600;
+        i { font-size: 1rem; color: $bg-light; }
+      }
+    }
+
+    .hero-cta { display: flex; gap: .75rem; margin-top: .5rem; }
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 6) Projects
+// ----------------------------------------------------------------------------
+.projects {
+  background-color: linear-gradient(135deg, #0a0a0a 0%, rgb(22.75, 22.75, 22.75) 100%);
+  // Ensure text is readable on the dark background
+  color: $bg-light;
+  width: 90%;
+  padding: 4rem 0;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: $bg-light;
+  }
+
+  &__container {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 0;
+
+    &.is-reversed {
+      grid-template-columns: 1.2fr 1fr;
+
+      .project-copy { order: 2; }
+      .project-image { order: 1; }
+    }
+
+    // reveal animation baseline
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+    will-change: opacity, transform;
+
+    &.in-view {
+      opacity: 1;
+      transform: none;
+
+      .project-copy, .project-image {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
+  .kicker {
+    font-size: 0.85rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: $bg-light;
+    margin-bottom: 1rem;
+    h3{
+      color: $bg-light;
+    }
+  }
+
+  h3 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    color: $bg-light;
+  }
+
+  .meta, .date {
+    color: rgba($bg-light, 0.85);
+    margin-top: .5rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .button {
+      display: inline-block;
+      background-color: $accent;
+      color: #fff;
+      padding: 0.6rem 1.1rem;
+      border-radius: 2rem;
+
+      &.ghost {
+        background: transparent;
+        color: $accent;
+        border: 2px solid $accent;
+      }
+
+      &:hover { background-color: color.adjust($accent, $lightness: -8%); }
+      &.ghost:hover { background: $accent; color: #fff; }
+    }
+  }
+
+  .project-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: transparent; // Remove light background
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      max-width: 400px; // Make the GIF smaller
+      height: auto; // Maintain aspect ratio
+      object-fit: contain;
+      border-radius: 12px;
+      image-rendering: -webkit-optimize-contrast; // Improve GIF rendering
+      image-rendering: crisp-edges; // Reduce blur
+    }
+  }
+}
+
+// Force project copy to use light text on dark background
+.projects .project-copy {
+  color: $bg-light;
+
+  p { color: $bg-light; }
+  strong { color: $bg-light; }
+}
+
+// ----------------------------------------------------------------------------
+// Custom CSS Animations for Projects
+// ----------------------------------------------------------------------------
+
+// Animation 1: Travel Animation - Plane flying with location pins
+.travel-animation {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .plane {
+    font-size: 5rem;
+    position: absolute;
+    animation: fly-across 8s linear infinite;
+    filter: drop-shadow(0 0 20px rgba($accent, 0.6));
+    z-index: 10;
+  }
+
+  .location-pin {
+    position: absolute;
+    font-size: 3rem;
+    animation: pin-bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba($accent, 0.5));
+
+    &:nth-child(2) { top: 20%; left: 20%; animation-delay: 0s; }
+    &:nth-child(3) { top: 65%; left: 30%; animation-delay: 0.5s; }
+    &:nth-child(4) { top: 30%; right: 25%; animation-delay: 1s; }
+    &:nth-child(5) { bottom: 25%; right: 20%; animation-delay: 1.5s; }
+  }
+
+  .route-line {
+    position: absolute;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba($accent, 0.6), transparent);
+    animation: route-glow 3s ease-in-out infinite;
+
+    &:nth-child(6) { top: 30%; left: 20%; width: 50%; transform: rotate(15deg); }
+    &:nth-child(7) { top: 60%; left: 30%; width: 45%; transform: rotate(-10deg); animation-delay: 1s; }
+  }
+
+  .globe {
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.15;
+    animation: rotate-slow 20s linear infinite;
+  }
+}
+
+@keyframes fly-across {
+  0% { top: 10%; left: -10%; transform: rotate(-15deg); }
+  50% { top: 40%; left: 50%; transform: rotate(5deg); }
+  100% { top: 20%; left: 110%; transform: rotate(-10deg); }
+}
+
+@keyframes pin-bounce {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-15px) scale(1.1); }
+}
+
+@keyframes route-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Animation 2: Camera/IoT Animation - Smart camera with signals
+.camera-animation {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .camera-icon {
+    font-size: 6rem;
+    z-index: 10;
+    animation: camera-focus 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba($accent, 0.7));
+  }
+
+  .signal-ring {
+    position: absolute;
+    border: 3px solid rgba($accent, 0.6);
+    border-radius: 50%;
+    animation: signal-pulse 2s ease-out infinite;
+
+    &:nth-child(2) { width: 100px; height: 100px; animation-delay: 0s; }
+    &:nth-child(3) { width: 150px; height: 150px; animation-delay: 0.4s; }
+    &:nth-child(4) { width: 200px; height: 200px; animation-delay: 0.8s; }
+  }
+
+  .wifi-icon {
+    position: absolute;
+    font-size: 2.5rem;
+    color: $accent;
+    opacity: 0.7;
+    animation: wifi-pulse 2s ease-in-out infinite;
+
+    &:nth-child(5) { top: 15%; right: 20%; animation-delay: 0s; }
+    &:nth-child(6) { bottom: 20%; left: 15%; animation-delay: 0.7s; }
+  }
+
+  .smart-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: $accent;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba($accent, 0.8);
+    animation: dot-orbit 4s linear infinite;
+
+    &:nth-child(7) { animation-delay: 0s; }
+    &:nth-child(8) { animation-delay: 1s; }
+    &:nth-child(9) { animation-delay: 2s; }
+    &:nth-child(10) { animation-delay: 3s; }
+  }
+}
+
+@keyframes camera-focus {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes signal-pulse {
+  0% { opacity: 0.8; transform: scale(0.8); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+@keyframes wifi-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes dot-orbit {
+  0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+// Animation 3: Puzzle Game Animation - Puzzle pieces and gaming elements
+.puzzle-animation {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .puzzle-piece {
+    position: absolute;
+    font-size: 4rem;
+    animation: puzzle-float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba($accent, 0.6));
+    
+    &:nth-child(1) { top: 15%; left: 15%; animation-delay: 0s; transform: rotate(-15deg); }
+    &:nth-child(2) { top: 20%; right: 20%; animation-delay: 0.5s; transform: rotate(25deg); }
+    &:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 1s; transform: rotate(10deg); }
+    &:nth-child(4) { bottom: 25%; right: 15%; animation-delay: 1.5s; transform: rotate(-20deg); }
+  }
+
+  .game-controller {
+    font-size: 7rem;
+    z-index: 10;
+    animation: controller-bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba($accent, 0.7));
+  }
+
+  .sparkle {
+    position: absolute;
+    font-size: 2rem;
+    animation: sparkle-twinkle 1.5s ease-in-out infinite;
+    
+    &:nth-child(6) { top: 10%; left: 50%; animation-delay: 0s; }
+    &:nth-child(7) { top: 30%; right: 15%; animation-delay: 0.3s; }
+    &:nth-child(8) { bottom: 15%; left: 30%; animation-delay: 0.6s; }
+    &:nth-child(9) { bottom: 35%; right: 25%; animation-delay: 0.9s; }
+  }
+
+  .level-indicator {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size: 1.5rem;
+    color: $accent;
+    font-weight: bold;
+    animation: level-pulse 2s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba($accent, 0.8);
+  }
+}
+
+@keyframes puzzle-float {
+  0%, 100% { transform: translateY(0px) rotate(var(--rotation, 0deg)); }
+  50% { transform: translateY(-20px) rotate(calc(var(--rotation, 0deg) + 10deg)); }
+}
+
+@keyframes controller-bounce {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); }
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+@keyframes level-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .projects .project-row {
+    grid-template-columns: 1fr;
+    display: block; // stack copy above image
+    gap: 1.5rem;
+
+    &.is-reversed {
+      .project-copy { order: 1; }
+      .project-image { order: 2; }
+    }
+  }
+
+  .projects .project-image {
+    margin-top: 1rem;
+  }
+
+  .projects .project-image img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 7) About (formerly “Pitch”)
+// ----------------------------------------------------------------------------
+.about {
+  background-color: linear-gradient(135deg, #0a0a0a 0%, rgb(22.75, 22.75, 22.75) 100%);
+  color: $bg-dark;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: $accent;
+  }
+
+  .about__wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+
+  .about__image {
+    flex: 1;
+    max-width: 300px;
+
+    img {
+      width: 100%;
+      border-radius: 50% 50% 40% 40% / 45% 45% 55% 55%; // custom oval
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      object-fit: cover;
+    }
+  }
+
+  .about__text {
+    flex: 2;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: $bg-light;
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: $accent;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: color.adjust($accent, $lightness: -10%);
+      }
+    }
+  }
+}
+
+// Portfolio profile section (header-style card)
+.profile-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-card {
+  width: min(900px, 100%);
+  background: rgba($bg-dark, 0.7);
+  border: 1px solid rgba($bg-light, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: left;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  backdrop-filter: blur(12px);
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "avatar identity"
+    "tagline tagline"
+    "actions actions";
+  gap: 1.25rem 1.5rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "avatar"
+      "identity"
+      "tagline"
+      "actions";
+    text-align: center;
+  }
+
+  .avatar { grid-area: avatar; }
+  .identity { grid-area: identity; }
+  .tagline { grid-area: tagline; }
+  .actions { grid-area: actions; }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    border: 3px solid $bg-light;
+    overflow: hidden;
+    align-self: start;
+
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+
+  .identity {
+    align-self: center;
+    .name { color: $bg-light; margin: 0; font-size: 1.75rem; }
+    .role { color: rgba($bg-light,.9); margin: .25rem 0; }
+    .location { color: rgba($bg-light,.75); font-size: .95rem; i { color: $accent; margin-right: .4rem; } }
+  }
+
+  .tagline {
+    color: rgba($bg-light,.85);
+    margin-top: .25rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: center;
+
+    .button.primary {
+      background: $accent;
+      border: 2px solid $accent;
+      color: #fff;
+      padding: .6rem 1rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      &:hover { background: color.adjust($accent, $lightness: -6%); }
+    }
+
+    .socials { display: inline-flex; gap: .5rem; }
+    .social {
+      width: 40px; height: 40px; display: grid; place-items: center;
+      color: $bg-light; border: 1px solid rgba($bg-light,.35); border-radius: 999px;
+      background: rgba($bg-light,.07);
+      &:hover { background: $accent; color: white; border-color: transparent; }
+    }
+  }
+}
+
+
+// ----------------------------------------------------------------------------
+// 8) Skills grid
+// ----------------------------------------------------------------------------
+.skills-education {
+  padding: 4rem 2rem;
+  background-color: linear-gradient(135deg, #0a0a0a 0%, rgb(22.75, 22.75, 22.75) 100%);
+  color: $bg-dark;
+  width: 90%;
+  margin: 0 auto;
+  
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background-color: $accent;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      &::before { display: none; }
+    }
+  }
+
+  .skills-column,
+  .education-column {
+    width: 50%;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    color: $bg-light;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  .education-column {
+    @media (max-width: 768px) {
+      margin-top: 2rem;
+    }
+  }
+
+  // Skills Grid
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background-color: $accent;
+    color: $bg-light;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+  .skill-group {
+    margin-bottom: 2rem;
+    h3 {
+      font-size: 1.2rem;
+      color: $bg-light;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      i {
+        display: inline-block;       // ensures padding & background apply correctly
+        font-size: 2.5rem;           // increase this value as desired
+        padding: 0.5rem;
+        border-radius: 10px;
+        color: inherit;
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+        &::after {
+          content: attr(title);
+          position: absolute;
+          bottom: calc(100% + 0.5rem);
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          padding: 1rem 1rem;
+          border-radius: 0.25rem;
+          font-size: 1rem;
+          font-family: $font;
+          white-space: nowrap;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.2s;
+        }
+
+        &:hover::after {
+          opacity: 1;
+        }
+      }
+
+      img {
+        width: 40px;
+        height: 40px;
+        padding: 0.5rem;
+        background-color: $accent;
+        border-radius: 10px;
+        transition: transform 0.2s ease-in-out;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  // Timeline
+  .timeline {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+
+    .timeline-dot {
+      position: absolute;
+      left: -0.65rem;
+      top: 0.4rem;
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: $accent;
+      border-radius: 50%;
+    }
+
+    .timeline-content {
+      margin-left: 0.5rem;
+      color: $bg-light;
+      h4 {
+        font-size: 1.1rem;
+        margin: 0 0 0.25rem 0;
+        color: $bg-light;
+      }
+      p {
+        font-size: 0.95rem;
+        margin: 0;
+        color: $bg-light;
+      }
+    }
+  }
+}
+
+
+// ----------------------------------------------------------------------------
+// 10) Global link hover
+// ----------------------------------------------------------------------------
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+  &:hover {
+    color: $accent;
+  }
+}
+// ----------------------------------------------------------------------------
+// 11) Boarder line
+// ----------------------------------------------------------------------------
+.border-line {
+  width: 90%;
+  height: 2px;
+  background-color: $bg-light;
+  margin: 0 auto;
+}
+ 
+
+// ----------------------------------------------------------------------------
+// 12) Contact section
+// ----------------------------------------------------------------------------
+.contact {
+  width: 90%;
+  padding: 4rem 0;
+  background-color: linear-gradient(135deg, #0a0a0a 0%, rgb(22.75, 22.75, 22.75) 100%);
+  color: $bg-light;
+
+  .contact__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .contact__card {
+    width: min(900px, 100%);
+    // Dark glass card to match the new theme
+    background: rgba($bg-dark, 0.6);
+    border: 1px solid rgba($bg-light, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+
+    h2 { color: $bg-light; margin-bottom: 0.75rem; }
+    p { color: rgba($bg-light, 0.9); margin-bottom: 1.25rem; }
+
+    .contact__actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .button {
+        display: inline-block;
+        background: $accent; // tertiary blue
+        color: #fff;
+        padding: 0.7rem 1.2rem;
+        border-radius: 999px;
+        border: 2px solid $accent;
+
+        &.ghost {
+          background: transparent;
+          color: $bg-light; // cream secondary
+          border: 2px solid $bg-light;
+        }
+        &:hover { background-color: color.adjust($accent, $lightness: -6%); }
+        &.ghost:hover { background: $bg-light; color: $bg-dark; }
+      }
+    }
+  }
+}
+
+
+// ----------------------------------------------------------------------------
+// 13) Contact Page
+// ----------------------------------------------------------------------------
+.contact-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $bg-dark 0%, color.adjust($bg-dark, $lightness: 5%) 100%);
+  padding-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-container {
+  width: 90%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+// Left Section - Contact Info
+.contact-info {
+  color: $bg-light;
+  
+  &__content {
+    padding: 2rem 0;
+  }
+}
+
+.contact-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: $bg-light;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+.contact-subtitle {
+  font-size: 1.2rem;
+  color: rgba($bg-light, 0.8);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.contact-details {
+  margin-bottom: 3rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba($bg-light, 0.05);
+  border-radius: 12px;
+  border-left: 4px solid $accent;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba($bg-light, 0.1);
+    transform: translateX(5px);
+  }
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, $accent 0%, color.adjust($accent, $lightness: 10%) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  
+  i {
+    font-size: 1.2rem;
+    color: white;
+  }
+}
+
+.contact-text {
+  h3 {
+    color: $bg-light;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+  
+  p {
+    color: rgba($bg-light, 0.7);
+    font-size: 0.9rem;
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  width: 45px;
+  height: 45px;
+  background: rgba($bg-light, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $bg-light;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba($bg-light, 0.2);
+  
+  &:hover {
+    background: $accent;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba($accent, 0.3);
+  }
+  
+  i {
+    font-size: 1.1rem;
+  }
+}
+
+// Right Section - Contact Form
+.contact-form-section {
+  background: rgba($bg-light, 0.95);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba($bg-light, 0.2);
+  
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $bg-dark;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  color: rgba($bg-dark, 0.7);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.contact-form {
+  .form-group {
+    margin-bottom: 1.5rem;
+    
+    label {
+      display: block;
+      color: $bg-dark;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid rgba($bg-dark, 0.1);
+      border-radius: 8px;
+      background: rgba($bg-light, 0.5);
+      color: $bg-dark;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      
+      &:focus {
+        outline: none;
+        border-color: $accent;
+        background: rgba($bg-light, 0.8);
+        box-shadow: 0 0 0 3px rgba($accent, 0.1);
+      }
+      
+      &::placeholder {
+        color: rgba($bg-dark, 0.5);
+      }
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, $accent 0%, color.adjust($accent, $lightness: -10%) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  &:hover {
+    background: linear-gradient(135deg, color.adjust($accent, $lightness: 5%) 0%, color.adjust($accent, $lightness: -5%) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba($accent, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  i {
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover i {
+    transform: translateX(3px);
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 14) Responsive tweaks
+// ----------------------------------------------------------------------------
+@media (max-width: 600px) {
+  .hero__content h1        { font-size: 3rem; }
+  .about__content h2,
+  .education__content h2,
+  .contact__content h2     { font-size: 1.75rem; }
+  .skills__content li      { font-size: 1rem; }
+}
+
+
+// ----------------------------------------------------------------------------
+// 14) Projects index (flip cards)
+// ----------------------------------------------------------------------------
+.projects-index {
+  width: 90%;
+  padding: 4rem 0;
+  color: $bg-light;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+    h1 { color: $bg-light; font-size: 2.5rem; margin-bottom: .5rem; }
+  }
+}
+
+  .projects-grid-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // Exactly 3 equal columns
+    gap: 1.5rem;
+    
+    // Responsive behavior
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr); // 2 columns on tablets
+    }
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; // 1 column on mobile
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  aspect-ratio: 3 / 4; // taller card
+  perspective: 1000px;
+  font-family: $font;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .flip-card-inner { transform: rotateY(180deg); }
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Modern glassmorphism effect
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  
+  // Modern hover effect
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 8px 16px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.flip-card-front {
+  // Peachy gradient using $bg-light
+  background: linear-gradient(
+    145deg,
+    color.scale($bg-light, $lightness: 40%) 0%,
+    color.scale($bg-light, $lightness: 20%) 50%,
+    color.scale($bg-light, $lightness: 0%) 100%
+  );
+  color: $bg-dark;
+  border: none;
+  border-left: 4px solid $bg-light;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 4px 8px rgba(0,0,0,0.1);
+  
+  &:hover {
+    background: linear-gradient(
+      145deg,
+      color.scale($bg-light, $lightness: 35%) 0%,
+      color.scale($bg-light, $lightness: 15%) 50%,
+      color.scale($bg-light, $lightness: -5%) 100%
+    );
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1);
+  }
+
+  .project-thumb { 
+    width: 100%; 
+    aspect-ratio: 16 / 9;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .project-thumb img { 
+    width: 100%; 
+    height: 100%;
+    object-fit: contain; 
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .thumb-placeholder { 
+    width: 100%; 
+    aspect-ratio: 16/9; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: rgba(0,0,0,0.05); 
+    color: $accent; 
+    font-weight: 600; 
+    font-size: 1.5rem; 
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $bg-dark;
+    margin: 0;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .tag-list { 
+    list-style: none; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 0.5rem; 
+    justify-content: center; 
+    padding: 0; 
+    margin: 0;
+    margin-top: auto;
+  }
+  
+  .tag { 
+    background: rgba(0,0,0,0.05);
+    color: $bg-dark; 
+    border: none;
+    padding: 0.3rem 0.8rem; 
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.flip-card-back {
+  // Dramatic dark theme for back
+  background: linear-gradient(145deg, $accent 0%, color.adjust($accent, $lightness: -15%) 100%);
+  color: white;
+  transform: rotateY(180deg);
+  text-align: center;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  overflow: hidden; // contain inner scroll
+  
+  &:hover {
+    background: linear-gradient(145deg, color.adjust($accent, $lightness: 5%) 0%, color.adjust($accent, $lightness: -10%) 100%);
+    transform: rotateY(180deg) translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  
+  .title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.9);
+    flex: 1 1 auto; // take remaining height
+    text-align: left;
+    overflow-y: auto; // enable scroll when overflowing
+    -webkit-overflow-scrolling: touch;
+    padding-right: 0.4rem; // space for scrollbar
+  }
+
+  .actions { 
+    margin-top: auto; 
+    display: flex; 
+    gap: 0.5rem;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .button { 
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 0.8rem 1.5rem; 
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    backdrop-filter: blur(10px);
+    
+    &:hover {
+      background: rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+  }
+  
+  .button.ghost { 
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.9);
+    border: 2px solid rgba(255,255,255,0.4);
+    
+    &:hover {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border-color: rgba(255,255,255,0.6);
+    }
+  }
+}
+
+// Click hint badge
+.flip-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: $accent;
+  background: rgba($bg-light, 0.9);
+  border: 1px solid rgba($accent, 0.25);
+  border-radius: 999px;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  opacity: .85;
+}
+
+

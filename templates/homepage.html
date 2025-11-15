@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% load static %}
+
+
+{% block content %}
+<main class="site-main">
+
+  <!-- 1. Hero / Intro -->
+  <section id="hero" class="hero hero-combo" data-reveal>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="profile-card">
+          <div class="avatar">
+            <img src="{% static 'images/coolpic.jpeg' %}" alt="Benjamin Meadows" />
+          </div>
+          <div class="identity">
+            <h2 class="name">Benjamin Meadows</h2>
+            <p class="role">Full-Stack Web Developer</p>
+            <p class="location"><i class="fa-solid fa-map-pin" aria-hidden="true"></i> Bristol, UK</p>
+          </div>
+          <p class="tagline">Building real products for real clients, not just more projects.</p>
+          <div class="actions">
+            <a href="{% static 'files/BenjaminMeadows_CV.pdf' %}" class="button primary" download>CV</a>
+            <div class="socials">
+              <a href="mailto:benjaminmeadows360@hotmail.co.uk" class="social" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+              <a href="https://github.com/Ben-Meadows" target="_blank" rel="noopener" class="social" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/ben-meadows-640469287/" target="_blank" rel="noopener" class="social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero__content">
+          <h1>Benjamin Meadows</h1>
+          <h2 class="subtitle">Full-Stack Software Developer</h2>
+        </div>
+        <ul class="stack-badges">
+          <li class="badge"><i class="devicon-python-plain"></i> Python</li>
+          <li class="badge"><i class="devicon-django-plain"></i> Django</li>
+          <li class="badge"><i class="devicon-react-original"></i> React</li>
+          <li class="badge"><i class="devicon-nodejs-plain"></i> Node.js</li>
+          <li class="badge"><i class="devicon-mysql-plain"></i> MySQL</li>
+          <li class="badge"><i class="devicon-amazonwebservices-plain"></i> AWS</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="border-line"></div>
+
+  
+  <div class="border-line"></div>
+
+
+  <!-- 4. Projects Section -->
+  <section id="projects" class="projects" data-reveal>
+    <div class="projects__container">
+      <h2>Selected Projects</h2>
+
+      {% for project in projects %}
+        {% if project.show_on_home %}
+          <article class="project-row {% if forloop.counter|divisibleby:2 %}is-reversed{% endif %}">
+            <div class="project-copy">
+              <div class="kicker">Case study {{ forloop.counter|stringformat:"02" }}</div>
+              <h3>{{ project.title }}</h3>
+              
+              {% if project.small_description %}
+                <p>{{ project.small_description|linebreaksbr }}</p>
+              {% else %}
+                <p>{{ project.description|linebreaksbr }}</p>
+              {% endif %}
+
+              {% if project.skills %}
+                <p class="meta"><strong>Skills:</strong> {{ project.skills }}</p>
+              {% endif %}
+
+              <div class="actions">
+                {% if project.slug %}
+                  <a href="{% url 'project_detail' project.slug %}" class="button primary">View case study</a>
+                {% endif %}
+                {% if project.link %}
+                  <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="button">Live / Repo</a>
+                {% endif %}
+              </div>
+
+              {% if project.project_date_start or project.project_date_end %}
+                <p class="date">
+                  <small>
+                    {{ project.project_date_start|date:"M Y" }}{% if project.project_date_end %} – {{ project.project_date_end|date:"M Y" }}{% else %} – Present{% endif %}
+                  </small>
+                </p>
+              {% endif %}
+            </div>
+
+            <div class="project-image">
+              {% if forloop.counter == 1 %}
+                <!-- Travel Animation - EuroRail -->
+                <div class="travel-animation">
+                  <div class="plane">✈️</div>
+                  <div class="location-pin">📍</div>
+                  <div class="location-pin">📍</div>
+                  <div class="location-pin">📍</div>
+                  <div class="location-pin">📍</div>
+                  <div class="route-line"></div>
+                  <div class="route-line"></div>
+                  <div class="globe">🌍</div>
+                </div>
+              {% elif forloop.counter == 2 %}
+                <!-- Camera/IoT Animation -->
+                <div class="camera-animation">
+                  <div class="camera-icon">📷</div>
+                  <div class="signal-ring"></div>
+                  <div class="signal-ring"></div>
+                  <div class="signal-ring"></div>
+                  <div class="wifi-icon">📡</div>
+                  <div class="wifi-icon">📶</div>
+                  <div class="smart-dot"></div>
+                  <div class="smart-dot"></div>
+                  <div class="smart-dot"></div>
+                  <div class="smart-dot"></div>
+                </div>
+              {% else %}
+                <!-- Puzzle Game Animation -->
+                <div class="puzzle-animation">
+                  <div class="puzzle-piece">🧩</div>
+                  <div class="puzzle-piece">🧩</div>
+                  <div class="puzzle-piece">🧩</div>
+                  <div class="puzzle-piece">🧩</div>
+                  <div class="game-controller">🎮</div>
+                  <div class="sparkle">✨</div>
+                  <div class="sparkle">✨</div>
+                  <div class="sparkle">✨</div>
+                  <div class="sparkle">✨</div>
+                  <div class="level-indicator">LVL UP!</div>
+                </div>
+              {% endif %}
+            </div>        
+          </article>
+
+          <div class="border-line"></div>
+        {% endif %}
+      {% empty %}
+        <p>No projects to show yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+
+  <section id="skills-education" class="skills-education" data-reveal>
+    <div class="skills-education__container">
+      <!-- Skills Column -->
+      <div class="skills-column">
+        <h2>Core Skills</h2>
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <div class="skill-icons">
+            <i class="devicon-python-plain"  title="Python"></i>
+            <i class="devicon-javascript-plain"  title="Javascript"></i>
+            <i class="devicon-java-plain"  title="Java"></i>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Web Technologies</h3>
+          <div class="skill-icons">
+            <i class="devicon-react-original"  title="React"></i>
+            <i class="devicon-nodejs-plain"  title="Node js"></i>
+            <i class="devicon-sass-original"  title="Sass"></i>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Databases</h3>
+          <div class="skill-icons">
+            <i class="devicon-mysql-plain"  title="MySQL"></i>
+            <i class="devicon-mongodb-plain"  title="MongoDB"></i>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Tools</h3>
+          <div class="skill-icons">
+            <i class="devicon-docker-plain"  title="Docker"></i>
+            <i class="devicon-git-plain"  title="Git"></i>
+            <i class="devicon-linux-plain"  title="Linux"></i>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Experience + Education Column -->
+      <div class="education-column">
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Full-Stack Developer - Glentham Life Sciences (2024 - Present)</h4>
+              
+              <ul>
+                <li>Solo developer owning planning, development, testing, deployment, and infrastructure (Present).</li>
+                <li>Built an internal QMS for training/compliance tracking with automated reminders and approvals.</li>
+                <li>Implemented order delivery status tracking with a customer‑facing progress bar.</li>
+                <li>Developed executive dashboards surfacing KPIs to give leadership real‑time visibility.</li>
+                <li>Owned infrastructure, CI/CD, and testing to ship reliable releases end‑to‑end.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3>Education</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>B.Sc. Computer Science - Cardiff University - 2:1 (2023)</h4>
+              <p>
+                <ul>
+                  <li>Key Modules: AI, machine learning, Discrete mathematics, database systems, object-oriented programming, IoT, Network communications.</li>
+                  <li>Grade: Achieved a high 2:1</li>
+                </ul>
+              </p>  
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>St Peter’s Sixth Form - 2017 – 2019</h4>
+              <p>
+                <ul>
+                  <li>A Level: Maths (B), Biology (C), Chemistry (C)</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="border-line"></div>
+
+  <!-- 5. Contact / CTA -->
+  <section id="contact" class="contact" data-reveal>
+    <div class="contact__container">
+      <div class="contact__card">
+        <h2>Let’s build something</h2>
+        <p>If you have an idea, an opening, or just want to say hello, I’m always happy to chat.</p>
+        <div class="contact__actions">
+            <a href="mailto:benjaminmeadows360@hotmail.co.uk" class="button">Email me</a>
+          <a href="https://www.linkedin.com/in/ben-meadows-640469287/" target="_blank" rel="noopener" class="button ghost">LinkedIn</a>
+          <a href="https://github.com/Ben-Meadows" target="_blank" rel="noopener" class="button ghost">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="border-line"></div>
+
+
+</main>
+{% endblock %}

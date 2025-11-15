@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Projects</title>
+	<link rel="stylesheet" href="./static/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<script src="./static/js/particles.js"></script>
+	<script defer src="./static/js/main.js"></script>
+</head>
+<body>
+	<header class="navbar">
+		<a href="./index.html" class="navbar__logo">BM</a>
+		<nav class="navbar__menu">
+			<ul>
+				<li><a href="./index.html">Home</a></li>
+				<li><a href="./projects.html">Projects</a></li>
+				<li><a href="./contact.html">Contact</a></li>
+			</ul>
+		</nav>
+		<a href="./contact.html" class="navbar__cta">Let’s Talk</a>
+	</header>
+
+	<div class="container">
+		<main class="site-main">
+			<section class="projects-index" data-reveal>
+				<div class="projects-index__header">
+					<h1>All Projects</h1>
+					<p>Browse selected work and personal builds. Click a card to flip for details.</p>
+				</div>
+
+				<div class="projects-grid-cards">
+					<article class="flip-card" data-reveal>
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+								<div class="flip-indicator" title="Click to flip" aria-hidden="true">↻</div>
+								<div class="project-thumb">
+									<img src="./static/images/Eurorail.png" alt="EuroRail Planner" loading="lazy">
+								</div>
+								<h3 class="title">EuroRail Planner</h3>
+								<ul class="tag-list">
+									<li class="tag">JavaScript</li>
+									<li class="tag">CSS</li>
+								</ul>
+							</div>
+							<div class="flip-card-back">
+								<h3 class="title">EuroRail Planner</h3>
+								<p class="desc">Interactive rail trip planner with route animation and itinerary builder.</p>
+								<div class="actions">
+									<a href="./projects/euro-rail.html" class="button ghost">Case study</a>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					<article class="flip-card" data-reveal>
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+								<div class="flip-indicator" title="Click to flip" aria-hidden="true">↻</div>
+								<div class="project-thumb">
+									<img src="./media/projects/IoT_camera.png" alt="IoT Camera Monitor" loading="lazy">
+								</div>
+								<h3 class="title">IoT Camera Monitor</h3>
+								<ul class="tag-list">
+									<li class="tag">IoT</li>
+									<li class="tag">WebSockets</li>
+								</ul>
+							</div>
+							<div class="flip-card-back">
+								<h3 class="title">IoT Camera Monitor</h3>
+								<p class="desc">Smart camera dashboard with live device status and signal activity.</p>
+								<div class="actions">
+									<a href="./projects/iot-camera.html" class="button ghost">Case study</a>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					<article class="flip-card" data-reveal>
+						<div class="flip-card-inner">
+							<div class="flip-card-front">
+								<div class="flip-indicator" title="Click to flip" aria-hidden="true">↻</div>
+								<div class="project-thumb">
+									<img src="./media/projects/Puzzle_dungeon.png" alt="Puzzle Dungeon" loading="lazy">
+								</div>
+								<h3 class="title">Puzzle Dungeon</h3>
+								<ul class="tag-list">
+									<li class="tag">HTML5</li>
+									<li class="tag">JavaScript</li>
+								</ul>
+							</div>
+							<div class="flip-card-back">
+								<h3 class="title">Puzzle Dungeon</h3>
+								<p class="desc">Retro puzzle game prototype with micro-interactions and level progress.</p>
+								<div class="actions">
+									<a href="./projects/puzzle-dungeon.html" class="button ghost">Case study</a>
+								</div>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<footer>
+		<p>© 2025 Ben Meadows. All rights reserved.</p>
+	</footer>
+</body>
+</html>
+
+

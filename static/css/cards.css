@@ -1,0 +1,27 @@
+body {
+  background-color: black;
+  color: #FFFFFF;
+  font-family: "Arial", sans-serif;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+.profile .card {
+  background: #334155;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  background: red !important;
+}
+.profile .card:hover {
+  transform: translateY(-5px);
+}
+
+/*# sourceMappingURL=cards.css.map */

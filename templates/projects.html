@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% load ben_extras %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<main class="site-main">
+  <section class="projects-index" data-reveal>
+    <div class="projects-index__header">
+      <h1>All Projects</h1>
+      <p>Browse selected work and personal builds. Click a card to flip for details.</p>
+    </div>
+
+    <div class="projects-grid-cards">
+      {% for project in projects %}
+        <article class="flip-card" data-reveal>
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-indicator" title="Click to flip" aria-hidden="true">↻</div>
+              <div class="project-thumb">
+                {% if project.image %}
+                  <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" />
+                {% else %}
+                  <div class="thumb-placeholder">{{ project.title|slice:":1" }}</div>
+                {% endif %}
+              </div>
+              <h3 class="title">{{ project.title }}</h3>
+              {% if project.skills %}
+                <ul class="tag-list">
+                  {% for tag in project.skills|split_csv %}
+                    <li class="tag">{{ tag }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+            <div class="flip-card-back">
+              <h3 class="title">{{ project.title }}</h3>
+              <p class="desc">{{ project.description|linebreaksbr }}</p>
+              <div class="actions">
+                <a href="{% url 'project_detail' project.slug %}" class="button ghost">Case study</a>
+                {% if project.link %}<a href="{{ project.link }}" target="_blank" rel="noopener" class="button">Live / Repo</a>{% endif %}
+              </div>
+            </div>
+          </div>
+        </article>
+      {% empty %}
+        <p>No projects yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+

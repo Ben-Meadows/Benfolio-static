@@ -1,0 +1,239 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home</title>
+	<link rel="stylesheet" href="./static/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<script src="./static/js/particles.js"></script>
+	<script defer src="./static/js/main.js"></script>
+</head>
+<body>
+	<header class="navbar">
+		<a href="./index.html" class="navbar__logo">BM</a>
+		<nav class="navbar__menu">
+			<ul>
+				<li><a href="./index.html">Home</a></li>
+				<li><a href="./projects.html">Projects</a></li>
+				<li><a href="./contact.html">Contact</a></li>
+			</ul>
+		</nav>
+		<a href="#contact" class="navbar__cta">Let’s Talk</a>
+	</header>
+
+	<div class="container">
+		<main class="site-main">
+			<section id="hero" class="hero hero-combo" data-reveal>
+				<div class="hero-grid">
+					<div class="hero-left">
+						<div class="profile-card">
+							<div class="avatar">
+								<img src="./static/images/coolpic.jpeg" alt="Benjamin Meadows">
+							</div>
+							<div class="identity">
+								<h2 class="name">Benjamin Meadows</h2>
+								<p class="role">Full-Stack Web Developer</p>
+								<p class="location"><i class="fa-solid fa-map-pin" aria-hidden="true"></i> Bristol, UK</p>
+							</div>
+							<p class="tagline">Building real products for real clients, not just more projects.</p>
+							<div class="actions">
+								<a href="./static/files/BenjaminMeadows_CV.pdf" class="button primary" download>CV</a>
+								<div class="socials">
+									<a href="mailto:benjaminmeadows360@hotmail.co.uk" class="social" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+									<a href="https://github.com/Ben-Meadows" target="_blank" rel="noopener" class="social" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+									<a href="https://www.linkedin.com/in/ben-meadows-640469287/" target="_blank" rel="noopener" class="social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="hero-right">
+						<div class="hero__content">
+							<h1>Benjamin Meadows</h1>
+							<h2 class="subtitle">Full-Stack Software Developer</h2>
+						</div>
+						<ul class="stack-badges">
+							<li class="badge"><i class="devicon-python-plain"></i> Python</li>
+							<li class="badge"><i class="devicon-django-plain"></i> Django</li>
+							<li class="badge"><i class="devicon-react-original"></i> React</li>
+							<li class="badge"><i class="devicon-nodejs-plain"></i> Node.js</li>
+							<li class="badge"><i class="devicon-mysql-plain"></i> MySQL</li>
+							<li class="badge"><i class="devicon-amazonwebservices-plain"></i> AWS</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<div class="border-line"></div>
+
+			<section id="projects" class="projects" data-reveal>
+				<div class="projects__container">
+					<h2>Selected Projects</h2>
+
+					<article class="project-row">
+						<div class="project-copy">
+							<div class="kicker">Case study 01</div>
+							<h3>EuroRail Planner</h3>
+							<p>Interactive rail trip planner with animated route visualization and itinerary builder.</p>
+							<p class="meta"><strong>Skills:</strong> JavaScript, CSS Animations</p>
+							<div class="actions">
+								<a href="./projects/euro-rail.html" class="button primary">View case study</a>
+							</div>
+						</div>
+						<div class="project-image">
+							<div class="image-frame image-16x9" aria-label="Project image placeholder">
+                                <img src="./media/projects/travelling.jpg" alt="Travelling picture">
+                            </div>
+						</div>
+					</article>
+
+					<div class="border-line"></div>
+
+					<article class="project-row is-reversed">
+						<div class="project-copy">
+							<div class="kicker">Case study 02</div>
+							<h3>IoT Camera Monitor</h3>
+							<p>Smart camera dashboard with live status indicators and device heartbeat animation.</p>
+							<p class="meta"><strong>Skills:</strong> IoT, WebSockets</p>
+							<div class="actions">
+								<a href="./projects/iot-camera.html" class="button primary">View case study</a>
+							</div>
+						</div>
+						<div class="project-image">
+							<div class="image-frame image-16x9" aria-label="Project image placeholder">
+                                <img src="./media/projects/IoT.jpg" alt="IoT Camera Monitor">
+                            </div>
+						</div>
+					</article>
+
+					<div class="border-line"></div>
+
+					<article class="project-row">
+						<div class="project-copy">
+							<div class="kicker">Case study 03</div>
+							<h3>Puzzle Dungeon</h3>
+							<p>Retro puzzle game prototype featuring fun micro-interactions and level-ups.</p>
+							<p class="meta"><strong>Skills:</strong> HTML5 Canvas, JS</p>
+							<div class="actions">
+								<a href="./projects/puzzle-dungeon.html" class="button primary">View case study</a>
+							</div>
+						</div>
+						<div class="project-image">
+							<div class="image-frame image-16x9" aria-label="Project image placeholder">
+                                <img src="./media/projects/Puzzle_dungeon.png" alt="Puzzle Dungeon">
+                            </div>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<div class="border-line"></div>
+
+			<section id="skills-education" class="skills-education" data-reveal>
+				<div class="skills-education__container">
+					<div class="skills-column">
+						<h2>Core Skills</h2>
+						<div class="skill-group">
+							<h3>Languages</h3>
+							<div class="skill-icons">
+								<i class="devicon-python-plain" title="Python"></i>
+								<i class="devicon-javascript-plain" title="Javascript"></i>
+								<i class="devicon-java-plain" title="Java"></i>
+							</div>
+						</div>
+						<div class="skill-group">
+							<h3>Web Technologies</h3>
+							<div class="skill-icons">
+								<i class="devicon-react-original" title="React"></i>
+								<i class="devicon-nodejs-plain" title="Node js"></i>
+								<i class="devicon-sass-original" title="Sass"></i>
+							</div>
+						</div>
+						<div class="skill-group">
+							<h3>Databases</h3>
+							<div class="skill-icons">
+								<i class="devicon-mysql-plain" title="MySQL"></i>
+								<i class="devicon-mongodb-plain" title="MongoDB"></i>
+							</div>
+						</div>
+						<div class="skill-group">
+							<h3>Tools</h3>
+							<div class="skill-icons">
+								<i class="devicon-docker-plain" title="Docker"></i>
+								<i class="devicon-git-plain" title="Git"></i>
+								<i class="devicon-linux-plain" title="Linux"></i>
+							</div>
+						</div>
+					</div>
+
+					<div class="education-column">
+						<h2>Experience</h2>
+						<div class="timeline">
+							<div class="timeline-item">
+								<div class="timeline-dot"></div>
+								<div class="timeline-content">
+									<h4>Full-Stack Developer - Glentham Life Sciences (2024 - Present)</h4>
+									<ul>
+										<li>Solo developer owning planning, development, testing, deployment, and infrastructure (Present).</li>
+										<li>Built an internal QMS for training/compliance tracking with automated reminders and approvals.</li>
+										<li>Implemented order delivery status tracking with a customer‑facing progress bar.</li>
+										<li>Developed executive dashboards surfacing KPIs to give leadership real‑time visibility.</li>
+										<li>Owned infrastructure, CI/CD, and testing to ship reliable releases end‑to‑end.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<h3>Education</h3>
+						<div class="timeline">
+							<div class="timeline-item">
+								<div class="timeline-dot"></div>
+								<div class="timeline-content">
+									<h4>B.Sc. Computer Science - Cardiff University - 2:1 (2023)</h4>
+									<ul>
+										<li>Key Modules: AI, machine learning, Discrete mathematics, database systems, object-oriented programming, IoT, Network communications.</li>
+										<li>Grade: Achieved a high 2:1</li>
+									</ul>
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="timeline-dot"></div>
+								<div class="timeline-content">
+									<h4>St Peter’s Sixth Form - 2017 – 2019</h4>
+									<ul>
+										<li>A Level: Maths (B), Biology (C), Chemistry (C)</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="border-line"></div>
+
+			<section id="contact" class="contact" data-reveal>
+				<div class="contact__container">
+					<div class="contact__card">
+						<h2>Let’s build something</h2>
+						<p>If you have an idea, an opening, or just want to say hello, I’m always happy to chat.</p>
+						<div class="contact__actions">
+							<a href="mailto:benjaminmeadows360@hotmail.co.uk" class="button">Email me</a>
+							<a href="https://www.linkedin.com/in/ben-meadows-640469287/" target="_blank" rel="noopener" class="button ghost">LinkedIn</a>
+							<a href="https://github.com/Ben-Meadows" target="_blank" rel="noopener" class="button ghost">GitHub</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="border-line"></div>
+		</main>
+	</div>
+
+	<footer>
+		<p>© 2025 Ben Meadows. All rights reserved.</p>
+	</footer>
+</body>
+</html>
+
+

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ project.title }}{% endblock %}
+{% block content %}
+<main class="site-main">
+  <section class="projects">
+    <div class="projects__container">
+      <article class="project-row">
+        <div class="project-copy">
+          <div class="kicker">Case study</div>
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+          {% if project.skills %}<p class="meta"><strong>Skills:</strong> {{ project.skills }}</p>{% endif %}
+          {% if project.link %}
+            <div class="actions"><a class="button" href="{{ project.link }}" target="_blank" rel="noopener">Live / Repo</a></div>
+          {% endif %}
+        </div>
+        <div class="project-image">
+          {% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}" />{% endif %}
+        </div>
+      </article>
+    </div>
+  </section>
+  <div class="border-line"></div>
+</main>
+{% endblock %}
+
+

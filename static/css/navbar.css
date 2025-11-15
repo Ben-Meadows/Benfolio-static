@@ -1,0 +1,85 @@
+.navbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  border-bottom: 3px solid #2728af;
+  padding: 1rem 0rem;
+  background-color: linear-gradient(135deg, #0a0a0a 0%, rgb(22.75, 22.75, 22.75) 100%);
+  padding: 1rem 1rem;
+}
+.navbar__logo {
+  color: #2728af;
+  text-decoration: none;
+  font-family: "Neue Montreal", sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1vw;
+  font-weight: 500;
+}
+.navbar__logo:hover, .navbar__logo:focus {
+  color: #FF6B35;
+}
+.navbar__menu {
+  color: #EDDBCC;
+}
+.navbar__menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
+}
+.navbar__menu ul li a {
+  position: relative;
+  color: #2728af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: larger;
+}
+.navbar__menu ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #FF6B35;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+.navbar__menu ul li a:hover, .navbar__menu ul li a:focus {
+  color: #FF6B35;
+}
+.navbar__menu ul li a:hover::after, .navbar__menu ul li a:focus::after {
+  width: 100%;
+}
+.navbar__cta {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid #2728af;
+  border-radius: 10px;
+  color: #2728af;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: "Neue Montreal", sans-serif;
+  font-size: 1vw;
+  font-weight: 500;
+  color: #2728af;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: larger;
+}
+.navbar__cta:hover {
+  color: #FF6B35;
+  border: 2px solid #FF6B35;
+}
+
+/*# sourceMappingURL=navbar.css.map */

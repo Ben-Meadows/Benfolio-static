@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contact - Benjamin Meadows{% endblock %}
+
+{% block content %}
+<main class="contact-page">
+  <div class="contact-container">
+    <!-- Left Section - Contact Info -->
+    <div class="contact-info">
+      <div class="contact-info__content">
+        <h1 class="contact-title">Let's Work Together</h1>
+        <p class="contact-subtitle">
+          Ready to bring your ideas to life? I'm always excited to discuss new projects and opportunities.
+        </p>
+        
+        <div class="contact-details">
+          <a class="contact-item" href="mailto:benjaminmeadows360@hotmail.co.uk">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-text">
+              <h3>Email</h3>
+              <p>benjaminmeadows360@hotmail.co.uk</p>
+            </div>
+          </a>
+          
+          <a class="contact-item" href="https://www.linkedin.com/in/ben-meadows-640469287/" target="_blank" rel="noopener">
+            <div class="contact-icon">
+              <i class="fab fa-linkedin"></i>
+            </div>
+            <div class="contact-text">
+              <h3>LinkedIn</h3>
+              <p>Connect with me professionally</p>
+            </div>
+          </a>
+          
+          <a class="contact-item" href="https://github.com/Ben-Meadows" target="_blank" rel="noopener">
+            <div class="contact-icon">
+              <i class="fab fa-github"></i>
+            </div>
+            <div class="contact-text">
+              <h3>GitHub</h3>
+              <p>View my repositories</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="social-links">
+          <a href="mailto:benjaminmeadows360@hotmail.co.uk" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://github.com/Ben-Meadows" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/ben-meadows-640469287/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Section - Contact Form -->
+    <div class="contact-form-section">
+      <div class="contact-form-container">
+        <h2 class="form-title">Send me a message</h2>
+        <p class="form-subtitle">I'll get back to you as soon as possible</p>
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        
+        <form class="contact-form" method="post" action="{% url 'contact' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">
+            <span>Send Message</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
